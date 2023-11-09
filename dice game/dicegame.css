@@ -12,7 +12,7 @@ body {
 #scoreboard {
   display: flex;
   justify-content: space-between;
-  width: 200px;
+  width: 20%;
   margin-bottom: 20px;
 }
 
@@ -20,6 +20,7 @@ body {
 #player2Score {
   text-align: center;
   border-radius: 10px;
+  padding: 5px;
 }
 
 #player1Score:hover,
