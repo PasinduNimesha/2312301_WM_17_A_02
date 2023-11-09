@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dice Game</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #diceContainer {
+      display: flex;
+      align-items: center;
+      margin: 20px;
+      border: 2px solid #000;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    img {
+      padding: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dice Game</h1>
+  <div id="diceContainer">
+    <img id="die1" src="1.png" width="50" height="50" />
+    <img id="die2" src="1.png" width="50" height="50" />
+  </div>
+  <button onclick="rollDice()">Roll Dice</button>
+
+  <script>
+    function rollDie() {
+      return Math.floor(1 + Math.random() * 6);
+    }
+
+    function rollDice() {
+      var result1 = rollDie();
+      var result2 = rollDie();
+
+      var die1 = document.getElementById("die1");
+      var die2 = document.getElementById("die2");
+
+      die1.src = result1 + ".png";
+      die2.src = result2 + ".png";
+    }
+  </script>
+</body>
+</html>
