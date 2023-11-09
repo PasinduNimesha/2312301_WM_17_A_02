@@ -2,46 +2,19 @@
 <html>
 <head>
   <title>Dice Game</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    #diceContainer {
-      display: flex;
-      align-items: center;
-      margin: 20px;
-      border: 2px solid #000;
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    img {
-      padding: 5px;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: 2px solid #000;
-      border-radius: 5px;
-      background-color: #333;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #555;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="dicegame.css">
 </head>
 <body>
   <h1>Dice Game</h1>
+  <div id="scoreboard">
+    <div id="player1Score">
+      <p>Player 1: <span id="score1">0</span></p>
+    </div>
+    <div id="player2Score">
+      <p>Player 2: <span id="score2">0</span></p>
+    </div>
+  </div>
+  <p id="turnIndicator">Player 1's Turn</p>
   <div id="diceContainer">
     <img id="die1" src="1.png" width="50" height="50" />
     <img id="die2" src="1.png" width="50" height="50" />
@@ -49,8 +22,20 @@
   <button onclick="rollDice()">Roll Dice</button>
 
   <script>
+    var currentPlayer = 1;
+    var player1Score = 0;
+    var player2Score = 0;
+
     function rollDie() {
       return Math.floor(1 + Math.random() * 6);
+    }
+
+    function updateScore(player, score) {
+      document.getElementById("score" + player).textContent = score;
+    }
+
+    function updateTurnIndicator(player) {
+      document.getElementById("turnIndicator").textContent = "Player " + player + "'s Turn";
     }
 
     function rollDice() {
@@ -62,7 +47,24 @@
 
       die1.src = result1 + ".png";
       die2.src = result2 + ".png";
+
+      var totalScore = result1 + result2;
+
+      if (currentPlayer === 1) {
+        player1Score += totalScore;
+        updateScore(1, player1Score);
+        currentPlayer = 2;
+        updateTurnIndicator(2);
+      } else {
+        player2Score += totalScore;
+        updateScore(2, player2Score);
+        currentPlayer = 1;
+        updateTurnIndicator(1);
+      }
     }
+
+    // Initialize the turn indicator for the first player
+    updateTurnIndicator(currentPlayer);
   </script>
 </body>
 </html>
