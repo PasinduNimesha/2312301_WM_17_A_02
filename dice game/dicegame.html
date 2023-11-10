@@ -5,51 +5,73 @@
   <link rel="stylesheet" type="text/css" href="dicegame.css">
 </head>
 <body>
+  <!-- Header for the Dice Game -->
   <h1>Dice Game</h1>
+  
+  <!-- Scoreboard for Player 1 and Player 2 -->
   <div id="scoreboard">
     <div id="player1Score">
+      <!-- Display Player 1's score -->
       <p>Player 1: <span id="score1">0</span></p>
     </div>
     <div id="player2Score">
+      <!-- Display Player 2's score -->
       <p>Player 2: <span id="score2">0</span></p>
     </div>
   </div>
+  
+  <!-- Display whose turn it is -->
+  <!-- Initially set to Player 1 -->
   <p id="turnIndicator">Player 1's Turn</p>
+  
+  <!-- Container for displaying two dice images -->
   <div id="diceContainer">
     <img id="die1" src="1.png" width="50" height="50" />
     <img id="die2" src="1.png" width="50" height="50" />
   </div>
+  
+  <!-- Button to roll the dice -->
   <button onclick="rollDice()">Roll Dice</button>
 
   <script>
+    // Initialize variables for the game
     var currentPlayer = 1;
     var player1Score = 0;
     var player2Score = 0;
 
+    // Function to simulate rolling a six-sided die
     function rollDie() {
       return Math.floor(1 + Math.random() * 6);
     }
 
+    // Function to update the displayed score for a player
     function updateScore(player, score) {
       document.getElementById("score" + player).textContent = score;
     }
 
+    // Function to update the displayed turn indicator
     function updateTurnIndicator(player) {
       document.getElementById("turnIndicator").textContent = "Player " + player + "'s Turn";
     }
 
+    // Function to handle the dice rolling process
     function rollDice() {
+      // Roll two dice
       var result1 = rollDie();
       var result2 = rollDie();
 
+      // Get references to the dice images
       var die1 = document.getElementById("die1");
       var die2 = document.getElementById("die2");
 
+      // Update the dice images based on the roll results
       die1.src = result1 + ".png";
       die2.src = result2 + ".png";
 
+      // Calculate the total score from the two dice
       var totalScore = result1 + result2;
 
+      // Update the score for the current player and switch to the other player
       if (currentPlayer === 1) {
         player1Score += totalScore;
         updateScore(1, player1Score);
